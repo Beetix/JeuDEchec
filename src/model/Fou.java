@@ -5,6 +5,8 @@
  */
 package model;
 
+import static java.lang.Math.abs;
+
 /**
  *
  * @author user
@@ -17,6 +19,26 @@ public class Fou extends AbstractPiece{
     
     public boolean isMoveOk(int xFinal, int yFinal, boolean isCatchOk, boolean isCastlingPossible)
     {
-        return ( Coord.coordonnees_valides(xFinal,yFinal));
+        if (!Coord.coordonnees_valides(xFinal, yFinal))
+        {
+            System.err.println("Coordonnées hors du plateau de jeu");
+            return false;
+        }
+        
+        if (getX() == xFinal && getY() == yFinal)
+        {
+            System.err.println("Les coordonnées sont les mêmes !");
+            return false;
+        }
+        
+        if (abs(getX() - xFinal) ==  abs(getY() - yFinal))
+        {
+            return true;
+        }
+        else
+        {
+            System.err.println("Déplacement impossible, le Fou ne se déplace qu'en diagonales");
+            return false;
+        }
     }
 }
