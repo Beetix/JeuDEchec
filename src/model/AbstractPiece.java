@@ -134,7 +134,7 @@ public abstract class AbstractPiece implements Pieces {
         System.out.println("Déplacement de " + monFou + " d'une case vers la droite et de 2 vers le haut : " +  (( monFou.isMoveOk(4, 5, false, false) ) ? "OK" : "KO") );
         System.out.println("Déplacement de " + monFou + " en dehors du plateau : " +  (( monFou.isMoveOk(3, 1, false, false) ) ? "OK" : "KO") );
         
-        Pieces monPionBlanc = new PionBlan(new Coord(0, 1));
+        Pieces monPionBlanc = new PionBlanc(new Coord(0, 1));
         
         System.out.println("Tests censés être OK :");
         System.out.println("Déplacement de " + monPionBlanc + " d'une case vers le haut : " +  (( monPionBlanc.isMoveOk(0, 2, true, false) ) ? "OK" : "KO") );
