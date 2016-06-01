@@ -11,10 +11,12 @@ import java.util.stream.Stream;
  */
 public class Echiquier {
     
-    boolean joueur;
+    Jeu jeuCourant;
+    Jeu jeuEnAttente;
     private Jeu jeuBlanc;
     private Jeu jeuNoir;
     private String message;
+    private boolean endofgame;
 
     public String getMessage() {
         return message;
@@ -26,14 +28,16 @@ public class Echiquier {
     
     public Echiquier()
     {
-        
+        endofgame=false;
     }
             
     public void switchJoueur()
     {
-        joueur=!joueur;
+        Jeu tmp=jeuCourant;
+        jeuCourant=jeuEnAttente;
+        jeuEnAttente=tmp;
     }
-            
+           
             
     public List<PieceIHMs> getPiecesIHM()
     {
@@ -58,44 +62,81 @@ public class Echiquier {
      */
     public boolean isMoveOk(int xInit, int yInit,int xFinal,int yFinal)
     {
-        if (joueur)
+        if(xFinal>7 || yFinal >7 || xFinal<0 || yFinal <0 )
         {
-            if(jeuBlanc.isPieceHere(xInit, yInit) )
-            {
-                return false;
-            }
-            
-            if (!jeuBlanc.isMoveOk(xInit, yInit, xFinal, yFinal, true, true) )
-            {
-                return false;
-            }
+            return false;
         }
+        
+        if(xFinal==xInit && yFinal==yInit)
+        {
+            return false;
+        }
+        
+
+        if(jeuCourant.isPieceHere(xInit, yInit) )
+        {
+            return false;
+        }
+
+        if (!jeuCourant.isMoveOk(xInit, yInit, xFinal, yFinal, false, false) )
+        {
+            return false;
+        }
+
+        if (jeuCourant.isPieceHere(xFinal, yFinal))
+        {
+            /* Ici, insérer traitement roc du roi */
+            return false;
+        }
+
+  
+        
+
         return true;
     }
     
     public boolean move(int xInit, int yInit,int xFinal,int yFinal)
     {
+        isMoveOk(xInit, yInit, xFinal, yFinal);
+        if (jeuEnAttente.isPieceHere(xFinal, yFinal))
+        {
+            jeuEnAttente.move(xFinal, yFinal,-1,-1);
+        }
+
+        jeuCourant.move(xInit, yInit, xFinal, yFinal);
         return true;
     }
     
     public Couleur getColorCurrentPlayer()
     {
-        if (joueur) 
+        if (jeuCourant==jeuBlanc) 
+        {
             return Couleur.BLANC;
+        }
         return Couleur.NOIR;
+        
     }
     
     public Couleur getPieceColor(int x, int y)
     {
         if(jeuBlanc.isPieceHere(x,y))
+        {
             return Couleur.BLANC;
-        if(jeuBlanc.isPieceHere(x,y))
+        }
+        if(jeuNoir.isPieceHere(x,y))
+        {
             return Couleur.NOIR;
+        }
         return null;
     }
     
     public String toString()
     {
         return ("Voici l'échiquier !");
+    }
+    
+    public boolean isEnd()
+    {
+        return endofgame;
     }
 }
