@@ -139,8 +139,57 @@ public abstract class AbstractPiece implements Pieces {
         System.out.println("Tests censés être OK :");
         System.out.println("Déplacement de " + monPionBlanc + " d'une case vers le haut : " +  (( monPionBlanc.isMoveOk(0, 2, true, false) ) ? "OK" : "KO") );
         System.out.println("Déplacement de " + monPionBlanc + " d'une case pour prendre un pion présent en haut à droite : " +  (( monPionBlanc.isMoveOk(1, 2, true, false) ) ? "OK" : "KO") );
-        System.out.println("Déplacement de " + monPionBlanc + " de 2 cases vers le haut pour le premier déplacement de ce pion  : " +  (( monPionBlanc.isMoveOk(0, 3, false, false) ) ? "OK" : "KO") );        
+        System.out.println("Déplacement de " + monPionBlanc + " de 2 cases vers le haut pour le premier déplacement de ce pion  : " +  (( monPionBlanc.isMoveOk(0, 3, false, false) ) ? "OK" : "KO") );
         
+        System.out.println("Tests censé êtres KO :");
+        System.out.println("Déplacement de " + monPionBlanc + " d'une case vers le bas : " +  (( monPionBlanc.isMoveOk(0, 0, false, false) ) ? "OK" : "KO") );
+        System.out.println("Déplacement de " + monPionBlanc + " d'une case en diagonale alors qu'il n'y a pas de pion : " +  (( monPionBlanc.isMoveOk(1, 2, false, false) ) ? "OK" : "KO") );
+        System.out.println("Déplacement de " + monPionBlanc + " d'une case où elle ne devrait pas pouvoir aller : " +  (( monPionBlanc.isMoveOk(7, 5, false, false) ) ? "OK" : "KO") );
+        
+        Pieces monPionNoir = new PionNoir(new Coord(4, 6));
+        
+        System.out.println("Tests censés être OK :");
+        System.out.println("Déplacement de " + monPionNoir + " d'une case vers le bas : " +  (( monPionNoir.isMoveOk(4, 5, true, false) ) ? "OK" : "KO") );
+        System.out.println("Déplacement de " + monPionNoir + " d'une case pour prendre un pion présent en bas à gauche : " +  (( monPionNoir.isMoveOk(3, 5, true, false) ) ? "OK" : "KO") );
+        System.out.println("Déplacement de " + monPionNoir + " de 2 cases vers le bas pour le premier déplacement de ce pion  : " +  (( monPionNoir.isMoveOk(4, 4, false, false) ) ? "OK" : "KO") );
+        
+        System.out.println("Tests censé êtres KO :");
+        System.out.println("Déplacement de " + monPionNoir + " d'une case vers le haut : " +  (( monPionNoir.isMoveOk(4, 7, false, false) ) ? "OK" : "KO") );
+        System.out.println("Déplacement de " + monPionNoir + " d'une case en diagonale alors qu'il n'y a pas de pion : " +  (( monPionNoir.isMoveOk(3, 5, false, false) ) ? "OK" : "KO") );
+        System.out.println("Déplacement de " + monPionNoir + " d'une case où elle ne devrait pas pouvoir aller : " +  (( monPionNoir.isMoveOk(0, 4, false, false) ) ? "OK" : "KO") );
+        
+        Pieces maReine = new Reine(Couleur.BLANC, new Coord(3,0));
+        
+        System.out.println("Tests censés être OK :");
+        System.out.println("Déplacement de " + maReine + " d'une case vers le haut et la droite : " +  (( maReine.isMoveOk(4, 1, false, false) ) ? "OK" : "KO") );
+        System.out.println("Déplacement de " + maReine + " vers l'arrête droite : " +  (( maReine.isMoveOk(7, 4, false, false) ) ? "OK" : "KO") );
+        System.out.println("Déplacement de " + maReine + " au coin bas droit  : " +  (( maReine.isMoveOk(7, 0, false, false) ) ? "OK" : "KO") );
+        System.out.println("Déplacement de " + maReine + " vers l'arrête haute : " +  (( maReine.isMoveOk(3, 7, false, false) ) ? "OK" : "KO") );
+
+        System.out.println("Tests censé êtres KO :");
+        System.out.println("Déplacement de " + maReine + " d'une case vers la droite et de 2 vers le haut : " +  (( maReine.isMoveOk(4, 2, false, false) ) ? "OK" : "KO") );
+        System.out.println("Déplacement de " + maReine + " d'une case où elle ne devrait pas pouvoir aller : " +  (( maReine.isMoveOk(0, 4, false, false) ) ? "OK" : "KO") );
+        
+        Pieces monRoi = new Roi(Couleur.BLANC, new Coord(4,0));
+        
+        System.out.println("Tests censés être OK :");
+        System.out.println("Déplacement de " + monRoi + " d'une case vers le haut et la droite : " +  (( monRoi.isMoveOk(5, 1, false, false) ) ? "OK" : "KO") );
+        System.out.println("Déplacement de " + monRoi + " d'une case vers la gauche : " +  (( monRoi.isMoveOk(3, 0, false, false) ) ? "OK" : "KO") );
+        System.out.println("Déplacement de " + monRoi + " d'une case vers le haut : " +  (( monRoi.isMoveOk(4, 1, false, false) ) ? "OK" : "KO") );
+
+        System.out.println("Tests censé êtres KO :");
+        System.out.println("Déplacement de " + monRoi + " de 2 cases vers la droite et  le haut : " +  (( monRoi.isMoveOk(6, 2, false, false) ) ? "OK" : "KO") );
+        System.out.println("Déplacement de " + monRoi + " d'une case où il ne devrait pas pouvoir aller : " +  (( monRoi.isMoveOk(0, 4, false, false) ) ? "OK" : "KO") );
+        
+        Pieces monCavalier = new Cavalier(Couleur.NOIR, new Coord(1,7));
+        
+        System.out.println("Tests censés être OK :");
+        System.out.println("Déplacement de " + monCavalier + " d'un L avec base en bas : " +  (( monCavalier.isMoveOk(2, 5, false, false) ) ? "OK" : "KO") );
+        System.out.println("Déplacement de " + monCavalier + " d'un L à l'envers avec base en bas : " +  (( monCavalier.isMoveOk(0, 5, false, false) ) ? "OK" : "KO") );
+        System.out.println("Déplacement de " + monCavalier + " d'une L avec base à gauche : " +  (( monCavalier.isMoveOk(3, 6, false, false) ) ? "OK" : "KO") );
+
+        System.out.println("Tests censé êtres KO :");
+        System.out.println("Déplacement de " + monCavalier + " d'une case où il ne devrait pas pouvoir aller : " +  (( monCavalier.isMoveOk(0, 4, false, false) ) ? "OK" : "KO") );
     }
     
 }
