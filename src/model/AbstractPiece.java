@@ -79,8 +79,25 @@ public abstract class AbstractPiece implements Pieces {
      */
     public abstract boolean isMoveOk(int xFinal, int yFinal,boolean isCatchOk,boolean isCastlingPossible);
     
-    public static void main(){
+    public static void main(String args[]) {
         Pieces maTour = new Tour(Couleur.NOIR, new Coord(0, 0));
+        
+        maTour.isMoveOk(1, 0, false, false);
+        maTour.isMoveOk(0, 7, false, false);
+        maTour.isMoveOk(7, 0, false, false);
+        
+        maTour.isMoveOk(8, 0, false, false);
+        maTour.isMoveOk(0, 0, false, false);
+        maTour.isMoveOk(1, 1, false, false);
+        
+        Pieces monFou = new Fou(Couleur.NOIR, new Coord(2, 0));
+        
+        monFou.isMoveOk(3, 1, false, false);
+        monFou.isMoveOk(1, 1, false, false);
+        monFou.isMoveOk(7, 5, false, false);
+        
+        monFou.isMoveOk(4, 5, false, false);
+        monFou.isMoveOk(8, 7, false, false);
     }
     
 }
