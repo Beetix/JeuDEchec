@@ -16,7 +16,7 @@ public class Echiquier {
     private Jeu jeuBlanc;
     private Jeu jeuNoir;
     private String message;
-    private boolean endofgame;
+    private boolean endOfGame;
 
     public String getMessage() {
         return message;
@@ -28,7 +28,7 @@ public class Echiquier {
     
     public Echiquier()
     {
-        endofgame=false;
+        endOfGame=false;
     }
             
     public void switchJoueur()
@@ -46,9 +46,9 @@ public class Echiquier {
     
     /**
      * L'algo est le suivant : 
-        s'il n'existe pas de piece du jeu courant aux coordonnÃ©es initiales --> false, 
-        si les coordonnÃ©es finales ne sont pas valides ou Ã©gales aux initiales --> false, 
-        si position finale ne correspond pas Ã  algo de dÃ©placement piece --> false, 
+        s'il n'existe pas de piece du jeu courant aux coordonnées initiales --> false, 
+        si les coordonnÃ©es finales ne sont pas valides ou égales aux initiales --> false, 
+        si position finale ne correspond pas Ã  algo de déplacement piece --> false, 
         s'il existe une piÃ©ce intermÃ©diaire sur la trajectoire --> false (sauf cavalier), 
         s'il existe une piÃ©ce positionnÃ©es aux coordonnÃ©es finales :
         si elle est de la mÃ©me couleur --> false ou tentative roque du roi, 
@@ -62,16 +62,6 @@ public class Echiquier {
      */
     public boolean isMoveOk(int xInit, int yInit,int xFinal,int yFinal)
     {
-        if(xFinal>7 || yFinal >7 || xFinal<0 || yFinal <0 )
-        {
-            return false;
-        }
-        
-        if(xFinal==xInit && yFinal==yInit)
-        {
-            return false;
-        }
-        
         
         if(jeuCourant.isPieceHere(xInit, yInit) )
         {
@@ -86,11 +76,6 @@ public class Echiquier {
         if (jeuCourant.isPieceHere(xFinal, yFinal))
         {
             /* Ici, insérer traitement roc du roi */
-            return false;
-        }
-         
-        if(xFinal==xInit && yFinal==yInit)
-        {
             return false;
         }
         
@@ -125,24 +110,17 @@ public class Echiquier {
     
     public Couleur getPieceColor(int x, int y)
     {
-        if(jeuBlanc.isPieceHere(x,y))
-        {
-            return Couleur.BLANC;
-        }
-        if(jeuNoir.isPieceHere(x,y))
-        {
-            return Couleur.NOIR;
-        }
-        return null;
+        return jeuCourant.getPieceCouleur(x, y);
     }
     
+    @Override
     public String toString()
     {
-        return ("Voici l'échiquier !");
+        return jeuBlanc.toString() + "\n" + jeuNoir.toString();
     }
     
     public boolean isEnd()
     {
-        return endofgame;
+        return endOfGame;
     }
 }

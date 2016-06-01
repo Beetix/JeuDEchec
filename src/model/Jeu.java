@@ -14,9 +14,13 @@ import tools.ChessPiecesFactory;
  * @author user
  */
 public class Jeu implements Game{
+    
     private List<Pieces> pieces;
+    
     private Couleur couleur;
+    
     private boolean castling;
+    
     private boolean possibleCapture;
     
     public Jeu(Couleur couleur){
@@ -26,25 +30,32 @@ public class Jeu implements Game{
 
     @Override
     public boolean isPieceHere(int x, int y) {
-        return findPiece(x,y)!=null;
+        return findPiece(x,y) != null;
     }
 
     @Override
     public boolean isMoveOk(int xInit, int yInit, int xFinal, int yFinal, boolean isCatchOk, boolean isCastlingPossible) {
-        Pieces pstart = findPiece(xInit,yInit);
-        return pstart.isMoveOk(xFinal,yFinal,isCatchOk, isCastlingPossible);
+        if (isPieceHere(xInit, yInit))
+        {
+            Pieces pstart = findPiece(xInit,yInit);
+            return pstart.isMoveOk(xFinal, yFinal, isCatchOk, isCastlingPossible);
+        }    
+        return false;
     }
 
     @Override
     public boolean move(int xInit, int yInit, int xFinal, int yFinal) {
-       return findPiece(xInit,yInit).move(xFinal,yFinal);
+        if (isMoveOk(xInit, yInit, xFinal, yFinal, possibleCapture, castling))
+        {
+            return findPiece(xInit,yInit).move(xFinal,yFinal);
+        }
+       return false;
     }
 
     @Override
     public boolean capture(int xCatch, int yCatch) {
         
         return true;
-        //return findPiece(xCatch,yCatch).capture();
     }
     
     private Pieces findPiece(int x, int y){
@@ -58,23 +69,32 @@ public class Jeu implements Game{
         return null;
     }
     
-    public Couleur getPieceCouleur(int x, int y){
-        return findPiece(x,y).getCouleur();
+    public Couleur getPieceCouleur(int x, int y) {
+        if (isPieceHere(x, y))
+        {
+            return findPiece(x,y).getCouleur();
+        }
+        return null;
     }
     
-    public String getPieceName(int x, int y){
-        return findPiece(x,y).getName();
+    public String getPieceName(int x, int y) {
+        if (isPieceHere(x, y))
+        {
+            return findPiece(x,y).getName();
+        }
+        return null;
+        
     }
     
     public List<PieceIHMs> getPiecesIHM(){
         PieceIHMs newPieceIHM = null;
         List<PieceIHMs> list = new LinkedList<PieceIHMs>();
         for (Pieces piece : pieces){
-        // si la pièce est toujours en jeu
-        if (piece.getX()!=-1){
-        newPieceIHM = new PieceIHM(piece);
-        list.add(newPieceIHM);
-        }
+            // si la pièce est toujours en jeu
+            if (piece.getX()!=-1) {
+                newPieceIHM = new PieceIHM(piece);
+                list.add(newPieceIHM);
+            }
         }
         return list;
     }
