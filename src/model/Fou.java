@@ -14,23 +14,11 @@ import static java.lang.Math.abs;
 public class Fou extends AbstractPiece{
     public Fou(Couleur couleur, Coord coord)
     {
-        super(couleur,coord);
+        super(couleur,coord, "Fou");
     }
-    
-    public boolean isMoveOk(int xFinal, int yFinal, boolean isCatchOk, boolean isCastlingPossible)
-    {
-        if (!Coord.coordonnees_valides(xFinal, yFinal))
-        {
-            System.err.println("Coordonnées hors du plateau de jeu");
-            return false;
-        }
-        
-        if (getX() == xFinal && getY() == yFinal)
-        {
-            System.err.println("Les coordonnées sont les mêmes !");
-            return false;
-        }
-        
+
+    @Override
+    protected boolean isDeplacementOkPourPiece(int xFinal, int yFinal, boolean isCatchOk, boolean isCastlingPossible) {
         if (abs(getX() - xFinal) ==  abs(getY() - yFinal))
         {
             return true;

@@ -19,11 +19,13 @@ public abstract class AbstractPiece implements Pieces {
      * 
      * @param couleur
      * @param coord 
+     * @param name 
      */
-    public AbstractPiece(Couleur couleur, Coord coord)
+    public AbstractPiece(Couleur couleur, Coord coord, String name)
     {
-        this.coord=coord;
-        this.couleur=couleur;
+        this.coord = coord;
+        this.couleur= couleur;
+        this.name = name;
     }
     
     
@@ -77,7 +79,34 @@ public abstract class AbstractPiece implements Pieces {
      * @param isCastlingPossible
      * @return true si déplacement légal en fonction des algo de déplacement spécifique de chaque pièce
      */
-    public abstract boolean isMoveOk(int xFinal, int yFinal,boolean isCatchOk,boolean isCastlingPossible);
+    public boolean isMoveOk(int xFinal, int yFinal,boolean isCatchOk,boolean isCastlingPossible)
+    {
+        if (!Coord.coordonnees_valides(xFinal, yFinal))
+        {
+            System.err.println("Coordonnées hors du plateau de jeu");
+            return false;
+        }
+        
+        if (getX() == xFinal && getY() == yFinal)
+        {
+            System.err.println("Les coordonnées sont les mêmes !");
+            return false;
+        }
+        
+        return isDeplacementOkPourPiece(xFinal, yFinal, isCatchOk, isCastlingPossible);
+    }
+    
+    /**
+     * 
+     * @param xFinal
+     * @param yFinal
+     * @param isCatchOk
+     * @param isCastlingPossible
+     * @return true si les spécificités de la piece lui autorise le déplacement
+     */
+    protected abstract boolean isDeplacementOkPourPiece(int xFinal, int yFinal,boolean isCatchOk,boolean isCastlingPossible);
+    
+    
     
     public static void main(String args[]) {
         System.setErr(System.out);
@@ -105,14 +134,12 @@ public abstract class AbstractPiece implements Pieces {
         System.out.println("Déplacement de " + monFou + " d'une case vers la droite et de 2 vers le haut : " +  (( monFou.isMoveOk(4, 5, false, false) ) ? "OK" : "KO") );
         System.out.println("Déplacement de " + monFou + " en dehors du plateau : " +  (( monFou.isMoveOk(3, 1, false, false) ) ? "OK" : "KO") );
         
-        Pieces monPionBlanc = new Pion(Couleur.BLANC, new Coord(0, 1));
+        Pieces monPionBlanc = new PionBlan(new Coord(0, 1));
         
         System.out.println("Tests censés être OK :");
         System.out.println("Déplacement de " + monPionBlanc + " d'une case vers le haut : " +  (( monPionBlanc.isMoveOk(0, 2, true, false) ) ? "OK" : "KO") );
         System.out.println("Déplacement de " + monPionBlanc + " d'une case pour prendre un pion présent en haut à droite : " +  (( monPionBlanc.isMoveOk(1, 2, true, false) ) ? "OK" : "KO") );
-        System.out.println("Déplacement de " + monPionBlanc + " de 2 cases vers le haut pour le premier déplacement de ce pion  : " +  (( monPionBlanc.isMoveOk(0, 3, false, false) ) ? "OK" : "KO") );
-
-        
+        System.out.println("Déplacement de " + monPionBlanc + " de 2 cases vers le haut pour le premier déplacement de ce pion  : " +  (( monPionBlanc.isMoveOk(0, 3, false, false) ) ? "OK" : "KO") );        
         
     }
     

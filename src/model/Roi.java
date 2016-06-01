@@ -14,25 +14,11 @@ import static java.lang.Math.abs;
 public class Roi extends AbstractPiece{
 
     public Roi(Couleur couleur, Coord coord){
-         super(couleur,coord);
+         super(couleur, coord, "Roi");
     }
-    
-    
+
     @Override
-    public boolean isMoveOk(int xFinal, int yFinal, boolean isCatchOk, boolean isCastlingPossible)
-    {
-        if (!Coord.coordonnees_valides(xFinal, yFinal))
-        {
-            System.err.println("Coordonnées hors du plateau de jeu");
-            return false;
-        }
-        
-        if (getX() == xFinal && getY() == yFinal)
-        {
-            System.err.println("Les coordonnées sont les mêmes !");
-            return false;
-        }
-        
+    protected boolean isDeplacementOkPourPiece(int xFinal, int yFinal, boolean isCatchOk, boolean isCastlingPossible) {
         if (abs(getX() - xFinal) <=1 &&  abs(getY() - yFinal) <= 1 )
         {
             return true;
@@ -42,7 +28,6 @@ public class Roi extends AbstractPiece{
             System.err.println("Déplacement impossible, le Roi ne se déplace que d'une case");
             return false;
         }
-    }
-    
+    }    
     
 }
