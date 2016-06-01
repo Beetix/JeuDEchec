@@ -21,14 +21,14 @@ public class Pion extends AbstractPiece {
         {
             if(isCatchOk)
             {
-                if(getY()+1==yFinal && couleur==Couleur.BLANC && (getX()+1==xFinal || getX()-1==xFinal) )
+                if( ( (getY()-1==yFinal && couleur==Couleur.NOIR)||(getY()+1==yFinal && couleur==Couleur.BLANC) ) && (getX()+1==xFinal || getX()-1==xFinal) )
                 {
                     return true;
                 }
             }
             else
             {
-                if(getY()+1==yFinal && couleur==Couleur.BLANC && getX()==xFinal )
+                if( ( (getY()-1==yFinal && couleur==Couleur.NOIR) || ( getY()+1==yFinal && couleur==Couleur.BLANC) ) && getX()==xFinal )
                 {
                     return true;
                 }
