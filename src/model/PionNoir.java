@@ -9,6 +9,9 @@ public class PionNoir extends Pion {
     public PionNoir(Coord coord) {
         super(Couleur.NOIR, coord);
     }
+    public PionNoir(Couleur cool, Coord coord) {
+        super(Couleur.NOIR, coord);
+    }
     
     @Override
     protected boolean isDeplacementUneCaseSuivantColonne(int xFinal, int yFinal) {

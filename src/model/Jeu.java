@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.util.LinkedList;
 import java.util.List;
 import tools.ChessPiecesFactory;
 
@@ -41,7 +42,9 @@ public class Jeu implements Game{
 
     @Override
     public boolean capture(int xCatch, int yCatch) {
-        return findPiece(xCatch,yCatch).capture();
+        
+        return true;
+        //return findPiece(xCatch,yCatch).capture();
     }
     
     private Pieces findPiece(int x, int y){
@@ -63,8 +66,17 @@ public class Jeu implements Game{
         return findPiece(x,y).getName();
     }
     
-    public List<Pieces> getPiecesIHM(){
-        return pieces;
+    public List<PieceIHMs> getPiecesIHM(){
+        PieceIHMs newPieceIHM = null;
+        List<PieceIHMs> list = new LinkedList<PieceIHMs>();
+        for (Pieces piece : pieces){
+        // si la pièce est toujours en jeu
+        if (piece.getX()!=-1){
+        newPieceIHM = new PieceIHM(piece);
+        list.add(newPieceIHM);
+        }
+        }
+        return list;
     }
     
     public void setCastling(){
@@ -86,9 +98,11 @@ public class Jeu implements Game{
         return retour;
     }
     
+    
     public static void main(String args[]){
         Jeu leJeuBlanc = new Jeu(Couleur.BLANC);
-        
+        System.out.println(leJeuBlanc.isPieceHere(5, 1));
         System.out.println(leJeuBlanc);
+        
     }
 }
