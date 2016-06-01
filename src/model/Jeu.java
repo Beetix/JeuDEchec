@@ -15,6 +15,8 @@ import tools.ChessPiecesFactory;
 public class Jeu implements Game{
     private List<Pieces> pieces;
     private Couleur couleur;
+    private boolean castling;
+    private boolean possibleCapture;
     
     public Jeu(Couleur couleur){
         this.couleur=couleur;
@@ -23,22 +25,55 @@ public class Jeu implements Game{
 
     @Override
     public boolean isPieceHere(int x, int y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return findPiece(x,y)!=null;
     }
 
     @Override
     public boolean isMoveOk(int xInit, int yInit, int xFinal, int yFinal, boolean isCatchOk, boolean isCastlingPossible) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Pieces pstart = findPiece(xInit,yInit);
+        return pstart.isMoveOk(xFinal,yFinal,isCatchOk, isCastlingPossible);
     }
 
     @Override
     public boolean move(int xInit, int yInit, int xFinal, int yFinal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return findPiece(xInit,yInit).move(xFinal,yFinal);
     }
 
     @Override
     public boolean capture(int xCatch, int yCatch) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return findPiece(xCatch,yCatch).capture();
+    }
+    
+    private Pieces findPiece(int x, int y){
+        for(Pieces piece : this.pieces)
+        {
+            if(piece.getX()==x && piece.getY()==y)
+            {
+                return piece;
+            }
+        }
+        return null;
+    }
+    
+    public Couleur getPieceCouleur(int x, int y){
+        return findPiece(x,y).getCouleur();
+    }
+    
+    public String getPieceName(int x, int y){
+        return findPiece(x,y).getName();
+    }
+    
+    public List<Pieces> getPiecesIHM(){
+        return pieces;
+    }
+    
+    public void setCastling(){
+        this.castling=true;
+    }
+    
+    public void setPossibleCapture(){
+        /* Find position of adverse jeu */
+        this.possibleCapture=true;
     }
     
     
@@ -56,5 +91,4 @@ public class Jeu implements Game{
         
         System.out.println(leJeuBlanc);
     }
-    
 }
