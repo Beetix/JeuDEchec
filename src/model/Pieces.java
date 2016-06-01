@@ -4,7 +4,7 @@ package model;
  *
  * @author beetix
  */
-interface Pieces {
+public interface Pieces {
     
     /**
      * @return indice de la colonne où est postionnée la pièce
