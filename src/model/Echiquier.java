@@ -72,7 +72,7 @@ public class Echiquier {
             return false;
         }
         
-
+        
         if(jeuCourant.isPieceHere(xInit, yInit) )
         {
             return false;
@@ -88,23 +88,29 @@ public class Echiquier {
             /* Ici, insérer traitement roc du roi */
             return false;
         }
-
-  
+         
+        if(xFinal==xInit && yFinal==yInit)
+        {
+            return false;
+        }
         
-
-        return true;
+         return true;
     }
     
     public boolean move(int xInit, int yInit,int xFinal,int yFinal)
     {
-        isMoveOk(xInit, yInit, xFinal, yFinal);
-        if (jeuEnAttente.isPieceHere(xFinal, yFinal))
+        if(isMoveOk(xInit, yInit, xFinal, yFinal))
         {
-            jeuEnAttente.move(xFinal, yFinal,-1,-1);
-        }
+            if (jeuEnAttente.isPieceHere(xFinal, yFinal))
+            {
+                jeuEnAttente.move(xFinal, yFinal,-1,-1);
+            }
 
-        jeuCourant.move(xInit, yInit, xFinal, yFinal);
-        return true;
+            jeuCourant.move(xInit, yInit, xFinal, yFinal);
+
+            return true;
+        }
+        return false;
     }
     
     public Couleur getColorCurrentPlayer()
