@@ -22,7 +22,7 @@ public class PionNoir extends Pion {
 
     @Override
     protected boolean isDeplacementDeDeuxAuPremierDeplacement(int xFinal, int yFinal) {
-        return getY() == 6 && yFinal == 4;
+        return getY() == 6 && yFinal == 4 && getX() == xFinal;
     }
     
     
