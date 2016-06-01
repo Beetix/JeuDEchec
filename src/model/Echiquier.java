@@ -58,6 +58,16 @@ public class Echiquier {
      */
     public boolean isMoveOk(int xInit, int yInit,int xFinal,int yFinal)
     {
+        if(xFinal>7 || yFinal >7 || xFinal<0 || yFinal <0 )
+        {
+            return false;
+        }
+        
+        if(xFinal==xInit && yFinal==yInit)
+        {
+            return false;
+        }
+        
         if (joueur)
         {
             if(jeuBlanc.isPieceHere(xInit, yInit) )
@@ -65,10 +75,23 @@ public class Echiquier {
                 return false;
             }
             
-            if (!jeuBlanc.isMoveOk(xInit, yInit, xFinal, yFinal, true, true) )
+            if (!jeuBlanc.isMoveOk(xInit, yInit, xFinal, yFinal, false, false) )
             {
                 return false;
             }
+            
+            if (jeuBlanc.isPieceHere(xFinal, yFinal))
+            {
+                /* Ici, insérer traitement roc du roi */
+                return false;
+            }
+            
+            if (jeuNoir.isPieceHere(xFinal, yFinal))
+            {
+                jeuNoir.move(xFinal, yFinal,-1,-1);
+            }
+            
+            jeuBlanc.move(xInit, yInit, xFinal, yFinal);
         }
         return true;
     }
