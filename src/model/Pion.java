@@ -17,6 +17,23 @@ public class Pion extends AbstractPiece {
     
     public boolean isMoveOk(int xFinal, int yFinal, boolean isCatchOk, boolean isCastlingPossible)
     {
-        return (isCatchOk && Coord.coordonnees_valides(xFinal,yFinal));
+        if(Coord.coordonnees_valides(xFinal,yFinal))
+        {
+            if(isCatchOk)
+            {
+                if(getY()+1==yFinal && couleur==Couleur.BLANC && (getX()+1==xFinal || getX()-1==xFinal) )
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                if(getY()+1==yFinal && couleur==Couleur.BLANC && getX()==xFinal )
+                {
+                    return true;
+                }
+            }
+        }
+    return false;
     }
 }
