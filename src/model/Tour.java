@@ -33,6 +33,7 @@ public class Tour extends AbstractPiece {
         else
         {
             System.err.println("Déplacement impossible, la Tour ne se déplace qu'en lignes");
+            return false;
         }
         
     }
