@@ -66,7 +66,7 @@ public abstract class AbstractPiece implements Pieces {
     
     @Override
     public java.lang.String toString(){
-        return ""+this.getX()+this.getY();
+        return (this.getName()+" à la position "+this.coord);
     }
     
     /**
