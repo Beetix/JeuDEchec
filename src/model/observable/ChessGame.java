@@ -85,7 +85,7 @@ public class ChessGame extends Observable implements BoardGames{
 		return echiquier.getColorCurrentPlayer();		
 	}	
 
-	public Couleur getPieceColor(int x, int y){
+	public Couleur getPieceColor(int x, int y) throws NullPointerException {
 		return echiquier.getPieceColor(x, y);
 	}
 

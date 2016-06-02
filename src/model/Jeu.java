@@ -69,12 +69,8 @@ public class Jeu implements Game{
         return null;
     }
     
-    public Couleur getPieceCouleur(int x, int y) {
-        if (isPieceHere(x, y))
-        {
-            return findPiece(x,y).getCouleur();
-        }
-        return null;
+    public Couleur getPieceCouleur(int x, int y) throws NullPointerException {
+        return findPiece(x,y).getCouleur();
     }
     
     public String getPieceName(int x, int y) {
@@ -122,7 +118,6 @@ public class Jeu implements Game{
     public static void main(String args[]){
         Jeu leJeuBlanc = new Jeu(Couleur.BLANC);
         System.out.println(leJeuBlanc.isPieceHere(5, 1));
-        System.out.println(leJeuBlanc);
-        
+        System.out.println(leJeuBlanc);        
     }
 }
