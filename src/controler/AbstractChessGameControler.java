@@ -2,6 +2,7 @@ package controler;
 
 import model.Coord;
 import model.Couleur;
+import model.PieceNotFoundException;
 import model.observable.ChessGame;
 
 
@@ -89,7 +90,7 @@ public abstract class AbstractChessGameControler implements ChessGameControlers 
 		return this.chessGame.getColorCurrentPlayer();		
 	}	
 
-	protected Couleur getPieceColor(Coord initCoord) throws NullPointerException {		
+	protected Couleur getPieceColor(Coord initCoord) throws PieceNotFoundException {		
 		return this.chessGame.getPieceColor(initCoord.x, initCoord.y);		
 	}	
 	

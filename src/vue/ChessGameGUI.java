@@ -9,11 +9,16 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsDevice;
 import java.awt.GridLayout;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.geom.AffineTransform;
+import java.awt.image.ColorModel;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -55,7 +60,7 @@ public class ChessGameGUI extends JFrame implements MouseListener, MouseMotionLi
      */
     public ChessGameGUI(String name, ChessGameControlers chessGameControler, Dimension boardSize)
     {
-        super();
+        super(name);
         this.chessGameControler = chessGameControler;
         
         layeredPane = new JLayeredPane();
@@ -70,7 +75,7 @@ public class ChessGameGUI extends JFrame implements MouseListener, MouseMotionLi
         layeredPane.add(chessBoard, JLayeredPane.DEFAULT_LAYER);
         chessBoard.setLayout( new GridLayout(8, 8) );
         chessBoard.setPreferredSize( boardSize );
-        chessBoard.setBounds(0, 0, boardSize.width, boardSize.height);
+        chessBoard.setBounds(0, 0, boardSize.width, boardSize.height-20);
  
         for (int i = 0; i < 64; i++) {
             JPanel square = new JPanel( new BorderLayout() );
@@ -88,8 +93,17 @@ public class ChessGameGUI extends JFrame implements MouseListener, MouseMotionLi
     @Override
     public void update(Observable arg0, Object arg1)
     {
+        JPanel c;
         //System.out.println(chessGameControler.getMessage() + "\n");	
-
+        for(Component comp:chessBoard.getComponents())
+        {
+            if(comp.getClass().equals(JPanel.class) )
+            {
+                ((JPanel)comp).removeAll();
+                ((JPanel)comp).revalidate();
+                ((JPanel)comp).repaint();
+            }
+        }
         List<PieceIHM> piecesIHM = (List<PieceIHM>) arg1;
 
 
@@ -113,7 +127,7 @@ public class ChessGameGUI extends JFrame implements MouseListener, MouseMotionLi
         if (c instanceof JPanel || !chessGameControler.isPlayerOK(new Coord(  (int)(e.getX()/87.5) , (int)(e.getY()/87.5) ))) 
         {
             System.out.println("mousePressed : isPlayerOK retourne faux");
-            e.consume();
+            //e.consume();
             return;
         }
         
@@ -133,7 +147,7 @@ public class ChessGameGUI extends JFrame implements MouseListener, MouseMotionLi
     {
          if (chessPiece == null )
          {
-             me.consume();
+             //me.consume();
              return;
          }
          chessPiece.setLocation(me.getX() + xAdjustment, me.getY() + yAdjustment);
@@ -146,18 +160,22 @@ public class ChessGameGUI extends JFrame implements MouseListener, MouseMotionLi
             return;
         }
         
-        if (!chessGameControler.move(new Coord(xInit,yInit),new Coord((int)((e.getX()+xAdjustment)/87.5),(int)((e.getY()+yAdjustment)/87.5) ) ))
-        {
-            System.out.println("Released - Départ : " + xInit + " " + yInit);
-            System.out.println("Released - Arrivé : " + (int)((e.getX()+xAdjustment)/87.5) + " " + (int)((e.getY()+yAdjustment)/87.5));
-            System.out.println("Pas résussi - MousseReleased");
-            return;
-        }
+        
 
         chessPiece.setVisible(false);
         Component c =  chessBoard.findComponentAt(e.getX(), e.getY());
  
-        if (c instanceof JLabel){
+        if (!chessGameControler.move(new Coord(xInit,yInit),new Coord((int)((e.getX())/87.5),(int)((e.getY())/87.5) ) ))
+        {
+            System.out.println("Released - Départ : " + xInit + " " + yInit);
+            System.out.println("Released - Arrivé : " + (int)((e.getX()+xAdjustment)/87.5) + " " + (int)((e.getY()+yAdjustment)/87.5));
+            System.out.println("Pas résussi - MousseReleased");
+            //chessPiece.setVisible(false);
+            return;
+        }
+        
+        
+       /* if (c instanceof JLabel){
             Container parent = c.getParent();
             parent.remove(0);
             parent.add( chessPiece );
@@ -165,9 +183,9 @@ public class ChessGameGUI extends JFrame implements MouseListener, MouseMotionLi
         else {
             Container parent = (Container)c;
             parent.add( chessPiece );
-        }
+        }*/
  
-        chessPiece.setVisible(true);
+        //chessPiece.setVisible(true);
     }
     
     
@@ -189,12 +207,12 @@ public class ChessGameGUI extends JFrame implements MouseListener, MouseMotionLi
     }
     public void mouseEntered(MouseEvent e)
     {
-        System.out.println("mouseEntered");
+      //  System.out.println("mouseEntered");
         chessGameControler.getMessage();
     }
     public void mouseExited(MouseEvent e)
     {
-        System.out.println("mouseExited");
+        //System.out.println("mouseExited");
         chessGameControler.getMessage();
     }
     

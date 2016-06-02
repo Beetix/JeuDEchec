@@ -91,12 +91,12 @@ public class Echiquier {
     {
         if(isMoveOk(xInit, yInit, xFinal, yFinal))
         {
-            /* Gestion  d'une capture
+            
             if (jeuEnAttente.isPieceHere(xFinal, yFinal))
             {
-                jeuEnAttente.move(xFinal, yFinal,-1,-1);
+                jeuEnAttente.supprimerPiece(xFinal, yFinal);
             }
-            */
+            
 
             jeuCourant.move(xInit, yInit, xFinal, yFinal);
             

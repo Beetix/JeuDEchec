@@ -133,6 +133,18 @@ public class Jeu implements Game{
         return retour;
     }
     
+    public boolean supprimerPiece(int xInit, int yInit)
+    {
+        try
+        {
+            return pieces.remove(findPiece(xInit,yInit));
+        }
+        catch (PieceNotFoundException pNFE)
+        {
+            return false;                        
+        }
+    }
+    
     
     public static void main(String args[]){
         Jeu leJeuBlanc = new Jeu(Couleur.BLANC);

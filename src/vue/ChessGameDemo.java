@@ -42,16 +42,16 @@ public class ChessGameDemo extends JFrame implements MouseListener, MouseMotionL
  
         // Add a few pieces to the board
  
-        JLabel piece = new JLabel( new ImageIcon("/home/vinod/amarexamples/chess.jpg") );
+        JLabel piece = new JLabel( new ImageIcon("/platform/home/user/NetBeansProjects/JeuDEchec/images/cavalierBlancS.png") );
         JPanel panel = (JPanel)chessBoard.getComponent(0);
         panel.add(piece);
-        piece = new JLabel(new ImageIcon("/home/vinod/amarexamples/chess1.jpg"));
+        piece = new JLabel(new ImageIcon("/platform/home/user/NetBeansProjects/JeuDEchec/images/cavalierBlancS.png"));
         panel = (JPanel)chessBoard.getComponent(15);
         panel.add(piece);
-        piece = new JLabel(new ImageIcon("/home/vinod/amarexamples/king.jpg"));
+        piece = new JLabel(new ImageIcon("/platform/home/user/NetBeansProjects/JeuDEchec/images/cavalierBlancS.png"));
         panel = (JPanel)chessBoard.getComponent(16);
         panel.add(piece);
-	piece = new JLabel(new ImageIcon("/home/vinod/amarexamples/camel.jpg"));
+	piece = new JLabel(new ImageIcon("/platform/home/user/NetBeansProjects/JeuDEchec/images/cavalierBlancS.png"));
         panel = (JPanel)chessBoard.getComponent(20);
         panel.add(piece);
 
