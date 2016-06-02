@@ -112,9 +112,12 @@ public abstract class AbstractPiece implements Pieces {
     protected abstract boolean isDeplacementOkPourPiece(int xFinal, int yFinal,boolean isCatchOk,boolean isCastlingPossible);
     
     
-    
+    /**
+     * Méthode main pour faire des tests sur les pièces
+     * @deprecated voir les tests JUnit qui remplacent l'utilisation de cette méthode 
+     * @param args 
+     */
     public static void main(String args[]) {
-        System.setErr(System.out);
         
         Pieces maTour = new Tour(Couleur.NOIR, new Coord(0, 0));
         
@@ -183,7 +186,7 @@ public abstract class AbstractPiece implements Pieces {
         System.out.println("Déplacement de " + monRoi + " d'une case vers le haut : " +  (( monRoi.isMoveOk(4, 1, false, false) ) ? "OK" : "KO") );
 
         System.out.println("Tests censé êtres KO :");
-        System.out.println("Déplacement de " + monRoi + " de 2 cases vers la droite et  le haut : " +  (( monRoi.isMoveOk(6, 2, false, false) ) ? "OK" : "KO") );
+        System.out.println("Déplacement de " + monRoi + " de 2 cases vers la droite et le haut : " +  (( monRoi.isMoveOk(6, 2, false, false) ) ? "OK" : "KO") );
         System.out.println("Déplacement de " + monRoi + " d'une case où il ne devrait pas pouvoir aller : " +  (( monRoi.isMoveOk(0, 4, false, false) ) ? "OK" : "KO") );
         
         Pieces monCavalier = new Cavalier(Couleur.NOIR, new Coord(1,7));
@@ -191,7 +194,7 @@ public abstract class AbstractPiece implements Pieces {
         System.out.println("Tests censés être OK :");
         System.out.println("Déplacement de " + monCavalier + " d'un L avec base en bas : " +  (( monCavalier.isMoveOk(2, 5, false, false) ) ? "OK" : "KO") );
         System.out.println("Déplacement de " + monCavalier + " d'un L à l'envers avec base en bas : " +  (( monCavalier.isMoveOk(0, 5, false, false) ) ? "OK" : "KO") );
-        System.out.println("Déplacement de " + monCavalier + " d'une L avec base à gauche : " +  (( monCavalier.isMoveOk(3, 6, false, false) ) ? "OK" : "KO") );
+        System.out.println("Déplacement de " + monCavalier + " d'un L avec base à gauche : " +  (( monCavalier.isMoveOk(3, 6, false, false) ) ? "OK" : "KO") );
 
         System.out.println("Tests censé êtres KO :");
         System.out.println("Déplacement de " + monCavalier + " d'une case où il ne devrait pas pouvoir aller : " +  (( monCavalier.isMoveOk(0, 4, false, false) ) ? "OK" : "KO") );
