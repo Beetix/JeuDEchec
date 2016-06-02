@@ -58,6 +58,7 @@ public class ChessGame extends Observable implements BoardGames{
 	 * @return OK si deplacement OK
 	 * si OK, permet l'alternance des joueurs
 	 */
+        @Override
 	public boolean move (int xInit, int yInit, int xFinal, int yFinal){
 		boolean ret = false; 
 
@@ -73,15 +74,18 @@ public class ChessGame extends Observable implements BoardGames{
 		return ret;	
 	}
 
+        @Override
 	public boolean isEnd(){
 		return echiquier.isEnd();		
 	}
 
+        @Override
 	public String getMessage() {
 		return echiquier.getMessage();
 	}
 
 
+        @Override
 	public Couleur getColorCurrentPlayer(){		
 		return echiquier.getColorCurrentPlayer();		
 	}	
