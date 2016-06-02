@@ -32,7 +32,7 @@ public class ChessGameControler extends AbstractChessGameControler {
             }
             catch (NullPointerException nPE)
             {
-                System.out.println("Pas de pièce à ces coordonnées !");
+                System.out.println("IsPlayerOk dans CGControler : Pas de pièce à ces coordonnées !");
                 return false;
             }
 	}

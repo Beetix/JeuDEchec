@@ -31,6 +31,7 @@ public class Echiquier {
         jeuBlanc = new Jeu(Couleur.BLANC);
         jeuNoir = new Jeu(Couleur.NOIR);
         jeuCourant = jeuBlanc;
+        jeuEnAttente=jeuNoir;
         message = "Début de partie";
         endOfGame=false;
     }

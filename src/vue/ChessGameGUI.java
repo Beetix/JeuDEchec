@@ -38,6 +38,8 @@ public class ChessGameGUI extends JFrame implements MouseListener, MouseMotionLi
     JLabel chessPiece;
     int xAdjustment;
     int yAdjustment;
+    int xInit;
+    int yInit;
     
     
     
@@ -107,16 +109,20 @@ public class ChessGameGUI extends JFrame implements MouseListener, MouseMotionLi
         chessPiece = null;
         Component c =  chessBoard.findComponentAt(e.getX(), e.getY());
         
- 
+         
         if (c instanceof JPanel || !chessGameControler.isPlayerOK(new Coord(  (int)(e.getX()/87.5) , (int)(e.getY()/87.5) ))) 
         {
+            System.out.println("mousePressed : isPlayerOK retourne faux");
             e.consume();
             return;
         }
+        
  
         Point parentLocation = c.getParent().getLocation();
         xAdjustment = parentLocation.x - e.getX();
         yAdjustment = parentLocation.y - e.getY();
+        xInit= (int)((e.getX())/87.5);
+        yInit= (int)((e.getY())/87.5);
         chessPiece = (JLabel)c;
         chessPiece.setLocation(e.getX() + xAdjustment, e.getY() + yAdjustment);
         chessPiece.setSize(chessPiece.getWidth(), chessPiece.getHeight());
@@ -139,11 +145,15 @@ public class ChessGameGUI extends JFrame implements MouseListener, MouseMotionLi
         {
             return;
         }
-        if (!chessGameControler.move(new Coord(e.getX(),e.getY()),new Coord(e.getX()+xAdjustment,e.getY()+ yAdjustment ) ))
+        
+        if (!chessGameControler.move(new Coord(xInit,yInit),new Coord((int)((e.getX()+xAdjustment)/87.5),(int)((e.getY()+yAdjustment)/87.5) ) ))
         {
-            
+            System.out.println("Released - Départ : " + xInit + " " + yInit);
+            System.out.println("Released - Arrivé : " + (int)((e.getX()+xAdjustment)/87.5) + " " + (int)((e.getY()+yAdjustment)/87.5));
+            System.out.println("Pas résussi - MousseReleased");
+            return;
         }
- 
+
         chessPiece.setVisible(false);
         Component c =  chessBoard.findComponentAt(e.getX(), e.getY());
  
@@ -165,22 +175,26 @@ public class ChessGameGUI extends JFrame implements MouseListener, MouseMotionLi
     {
        //Component c =  chessBoard.findComponentAt(e.getX()/87, e.getY()/75);
 
-        if(!chessGameControler.isPlayerOK(new Coord(  (int)(e.getX()/87.5) , (int)(e.getY()/87.5)  ) ) )
+        if(chessGameControler.isPlayerOK(new Coord(  (int)(e.getX()/87.5) , (int)(e.getY()/87.5)  ) ) )
         {
+            System.out.println((int)(e.getX()/87.5) + " " + (int)(e.getY()/87.5));
             chessGameControler.getMessage();
         }
     }
     
     public void mouseMoved(MouseEvent e)
     {
-        chessGameControler.getMessage();
+        //System.out.println("MouseMoved");
+        //chessGameControler.getMessage();
     }
     public void mouseEntered(MouseEvent e)
     {
+        System.out.println("mouseEntered");
         chessGameControler.getMessage();
     }
     public void mouseExited(MouseEvent e)
     {
+        System.out.println("mouseExited");
         chessGameControler.getMessage();
     }
     
