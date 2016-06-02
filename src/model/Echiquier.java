@@ -31,6 +31,7 @@ public class Echiquier {
         jeuBlanc = new Jeu(Couleur.BLANC);
         jeuNoir = new Jeu(Couleur.NOIR);
         jeuCourant = jeuBlanc;
+        message = "Début de partie";
         endOfGame=false;
     }
             
@@ -66,7 +67,7 @@ public class Echiquier {
     public boolean isMoveOk(int xInit, int yInit,int xFinal,int yFinal)
     {
         
-        if(jeuCourant.isPieceHere(xInit, yInit) )
+        if(!jeuCourant.isPieceHere(xInit, yInit) )
         {
             return false;
         }
@@ -89,16 +90,21 @@ public class Echiquier {
     {
         if(isMoveOk(xInit, yInit, xFinal, yFinal))
         {
+            /* Gestion  d'une capture
             if (jeuEnAttente.isPieceHere(xFinal, yFinal))
             {
                 jeuEnAttente.move(xFinal, yFinal,-1,-1);
             }
+            */
 
             jeuCourant.move(xInit, yInit, xFinal, yFinal);
-
+            
+            message = "OK";
             return true;
         }
+        message = "KO";
         return false;
+        
     }
     
     public Couleur getColorCurrentPlayer()
@@ -111,7 +117,7 @@ public class Echiquier {
         
     }
     
-    public Couleur getPieceColor(int x, int y)
+    public Couleur getPieceColor(int x, int y) throws NullPointerException
     {
         return jeuCourant.getPieceCouleur(x, y);
     }
