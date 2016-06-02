@@ -55,13 +55,18 @@ public abstract class AbstractPiece implements Pieces {
      * @param y
      * @return true si déplacement effectué
      */
+    @Override
     public boolean move(int x,int y){
+        this.coord.x = x;
+        this.coord.y = y;
+            
         return true;
     }
     /**
      * 
      * @return true si piece effectivement capturé Positionne x et y à -1
      */
+    @Override
     public boolean capture(){
         return true;
     }

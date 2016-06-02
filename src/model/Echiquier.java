@@ -11,8 +11,8 @@ import java.util.stream.Stream;
  */
 public class Echiquier {
     
-    Jeu jeuCourant;
-    Jeu jeuEnAttente;
+    private Jeu jeuCourant;
+    private Jeu jeuEnAttente;
     private Jeu jeuBlanc;
     private Jeu jeuNoir;
     private String message;
@@ -28,6 +28,9 @@ public class Echiquier {
     
     public Echiquier()
     {
+        jeuBlanc = new Jeu(Couleur.BLANC);
+        jeuNoir = new Jeu(Couleur.NOIR);
+        jeuCourant = jeuBlanc;
         endOfGame=false;
     }
             
@@ -73,11 +76,11 @@ public class Echiquier {
             return false;
         }
 
+        /* insérer traitement roc du roi
         if (jeuCourant.isPieceHere(xFinal, yFinal))
         {
-            /* Ici, insérer traitement roc du roi */
             return false;
-        }
+        }*/
         
          return true;
     }
