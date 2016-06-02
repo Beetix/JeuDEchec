@@ -27,5 +27,21 @@ public class TourTest {
         assertTrue(maTour.isMoveOk(1, 0, false, false));           
     }
     
+    @Test
+    public void deplacementAuCoinHautGaucheDoitRenvoyerVrai()
+    {
+        assertTrue(maTour.isMoveOk(0, 7, false, false));
+    }
     
+    @Test
+    public void deplacementAuCoinBasDroitDoitRenvoyerVrai()
+    {
+        assertTrue(maTour.isMoveOk(7, 0, false, false));
+    }
+    
+    @Test
+    public void deplacementEnDiagonaleDoitRenvoyerFaux()
+    {
+        assertTrue(maTour.isMoveOk(1, 1, false, false));
+    }
 }

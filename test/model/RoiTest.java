@@ -15,15 +15,41 @@ import static org.junit.Assert.*;
  */
 public class RoiTest {
     
-    public RoiTest() {
-    }
+    Pieces monRoi;
     
     @Before
     public void setUp() {
+        monRoi = new Roi(Couleur.BLANC, new Coord(4,0));
     }
 
     @Test
-    public void testSomeMethod() {
+    public void deplacementUneCaseVersLeHautADroiteDoitRenvoyerVrai()
+    {
+        assertTrue(monRoi.isMoveOk(5, 1, false, false));
     }
+    
+    @Test
+    public void deplacementUneCaseVersLaGaucheDoitRenvoyerVrai()
+    {
+        assertTrue(monRoi.isMoveOk(3, 0, false, false));
+    }
+    
+    @Test
+    public void deplacementUneCaseVersLeHautDoitRenvoyerVrai()
+    {
+        assertTrue(monRoi.isMoveOk(4, 1, false, false));
+    }
+    
+    @Test
+    public void deplacementDePlusUneCaseDoitRenvoyerFaux()
+    {
+        assertFalse(monRoi.isMoveOk(6, 2, false, false));
+    }
+    
+    public void deplacementVersUneCaseNonAtteignableEnUnCoupDoitRenvoyerFaux()
+    {
+        assertFalse(monRoi.isMoveOk(0, 4, false, false));
+    }
+    
     
 }

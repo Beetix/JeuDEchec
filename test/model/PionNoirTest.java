@@ -15,15 +15,45 @@ import static org.junit.Assert.*;
  */
 public class PionNoirTest {
     
-    public PionNoirTest() {
-    }
+    Pieces monPionNoir;
     
     @Before
     public void setUp() {
+        monPionNoir = new PionNoir(new Coord(4, 6));
     }
 
     @Test
-    public void testSomeMethod() {
+    public void deplacementUneCaseVersLeBasDoitRenvoyerVrai() {
+        assertTrue(monPionNoir.isMoveOk(4, 5, true, false));
+    }
+    
+    @Test
+    public void deplacementUneCasePourPrisePieceEnBasAGaucheDoitRenvoyerVrai() {
+        assertTrue(monPionNoir.isMoveOk(3, 5, true, false));
+    }
+    
+    @Test
+    public void deplacement2CasesVersLeBasPourPremierDeplacementPionDoitRenvoyerVrai()
+    {
+        assertTrue(monPionNoir.isMoveOk(4, 4, false, false));
+    }
+    
+    @Test
+    public void deplacementUneCaseVersLeHautDoitRenvoyerFaux()
+    {
+        assertFalse(monPionNoir.isMoveOk(4, 7, false, false));
+    }
+    
+    @Test
+    public void deplacementEnDiagonaleSansPieceAPrendreDoitRenvoyerFaux()
+    {
+        assertFalse(monPionNoir.isMoveOk(3, 5, false, false));
+    }
+    
+    @Test
+    public void deplacementVersUneCaseNonAtteignableEnUnCoupDoitRenvoyerFaux()
+    {
+        assertFalse(monPionNoir.isMoveOk(0, 4, false, false));
     }
     
 }

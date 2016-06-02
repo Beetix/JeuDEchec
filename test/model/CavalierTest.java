@@ -15,15 +15,34 @@ import static org.junit.Assert.*;
  */
 public class CavalierTest {
     
-    public CavalierTest() {
-    }
+    Pieces monCavalier;
     
     @Before
     public void setUp() {
+        monCavalier = new Cavalier(Couleur.NOIR, new Coord(1,7));
     }
 
     @Test
-    public void testSomeMethod() {
+    public void deplacementEnLAvecBaseEnBasDoitRenvoyerVrai()
+    {
+        assertTrue(monCavalier.isMoveOk(2, 5, false, false));
+    }
+    
+    @Test
+    public void deplacementEnLAEnversAvecBaseEnBasDoitRenvoyerVrai()
+    {
+        assertTrue(monCavalier.isMoveOk(0, 5, false, false));
+    }
+    
+    @Test
+    public void deplacementEnLAvecBaseAGaucheDoitRenvoyerVrai()
+    {
+        assertTrue(monCavalier.isMoveOk(3, 6, false, false));
+    }
+    
+    public void deplacementVersUneCaseNonAtteignableEnUnCoupDoitRenvoyerFaux()
+    {
+        assertFalse(monCavalier.isMoveOk(0, 4, false, false));
     }
     
 }

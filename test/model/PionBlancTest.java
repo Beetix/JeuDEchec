@@ -26,4 +26,35 @@ public class PionBlancTest {
     public void deplacementUneCaseVersLeHautDoitRenvoyerVrai() {
         assertTrue(monPionBlanc.isMoveOk(0, 2, true, false));
     }
+    
+    @Test
+    public void deplacementUneCasePourPrisePieceEnHautADroiteDoitRenvoyerVrai() {
+        assertTrue(monPionBlanc.isMoveOk(1, 2, true, false));
+    }
+    
+    @Test
+    public void deplacement2CasesVersLeHautPourPremierDeplacementPionDoitRenvoyerVrai()
+    {
+        assertTrue(monPionBlanc.isMoveOk(0, 3, false, false));
+    }
+    
+    @Test
+    public void deplacementUneCaseVersLeBasDoitRenvoyerFaux()
+    {
+        assertFalse(monPionBlanc.isMoveOk(0, 0, false, false));
+    }
+    
+    @Test
+    public void deplacementEnDiagonaleSansPieceAPrendreDoitRenvoyerFaux()
+    {
+        assertFalse(monPionBlanc.isMoveOk(1, 2, false, false));
+    }
+    
+    @Test
+    public void deplacementVersUneCaseNonAtteignableEnUnCoupDoitRenvoyerFaux()
+    {
+        assertFalse(monPionBlanc.isMoveOk(7, 5, false, false));
+    }
+    
+ 
 }

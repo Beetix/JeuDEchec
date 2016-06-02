@@ -27,8 +27,24 @@ public class FouTest {
     }
     
     @Test
-    public void deplacementUneCaseVersLeHauteEtLaDroiteDoitRenvoyerVrai() {
-        assertTrue( monFou.isMoveOk(3, 1, false, false));           
+    public void deplacementUneCaseVersLeHautEtLaDroiteDoitRenvoyerVrai() {
+        assertTrue(monFou.isMoveOk(3, 1, false, false));           
     }
     
+    @Test
+    public void deplacementUneCaseVersLeBasEtLaDroiteDoitRevoyerVrai() {
+        assertTrue(monFou.isMoveOk(1, 1, false, false));
+    }
+    
+    @Test
+    public void deplacementVersArreteDroiteDoitRenvoyerVrai()
+    {
+        assertTrue(monFou.isMoveOk(7, 5, false, false));
+    }
+    
+    @Test
+    public void deplacementUneCaseVersLaDroiteEtDe2VersLeHautDoitRenvoyerFaux()
+    {
+        assertFalse(monFou.isMoveOk(4, 5, false, false));
+    }
 }

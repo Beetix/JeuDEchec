@@ -15,15 +15,46 @@ import static org.junit.Assert.*;
  */
 public class ReineTest {
     
-    public ReineTest() {
-    }
+    Pieces maReine;
     
     @Before
     public void setUp() {
+        maReine = new Reine(Couleur.BLANC, new Coord(3,0));
     }
 
     @Test
-    public void testSomeMethod() {
+    public void deplacementUneCaseVersLeHautADroiteDoitRenvoyerVrai()
+    {
+        assertTrue(maReine.isMoveOk(4, 1, false, false));
+    }
+    
+    @Test
+    public void deplacementVersArreteDroiteDoitRenvoyerVrai()
+    {
+        assertTrue(maReine.isMoveOk(7, 4, false, false));
+    }
+    
+    @Test
+    public void deplacementAuCoinBasDroitDoitRenvoyerVrai()
+    {
+        assertTrue(maReine.isMoveOk(7, 0, false, false));
+    }
+    
+    @Test
+    public void deplacementVersArreteHauteDoitRenvoyerVrai()
+    {
+        assertTrue(maReine.isMoveOk(3, 7, false, false));
+    }
+    
+    @Test
+    public void deplacementUneCaseVersLaDroiteEt2VersLeHautDoitRenvoyerFaux()
+    {
+        assertFalse(maReine.isMoveOk(4, 2, false, false));
+    }
+    
+    public void deplacementVersUneCaseNonAtteignableEnUnCoupDoitRenvoyerFaux()
+    {
+        assertFalse(maReine.isMoveOk(0, 4, false, false));
     }
     
 }
