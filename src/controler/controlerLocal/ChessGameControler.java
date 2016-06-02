@@ -3,6 +3,7 @@ package controler.controlerLocal;
 import model.Coord;
 import model.observable.ChessGame;
 import controler.AbstractChessGameControler;
+import model.PieceNotFoundException;
 
 /**
  * @author francoise.perrin
@@ -30,9 +31,8 @@ public class ChessGameControler extends AbstractChessGameControler {
             {
                 return getColorCurrentPlayer().equals(chessGame.getPieceColor(initCoord.x, initCoord.y));
             }
-            catch (NullPointerException nPE)
+            catch (PieceNotFoundException pNotFoundException)
             {
-                System.out.println("Pas de pièce à ces coordonnées !");
                 return false;
             }
 	}

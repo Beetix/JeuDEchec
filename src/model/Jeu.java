@@ -23,31 +23,55 @@ public class Jeu implements Game{
     
     private boolean possibleCapture;
     
-    public Jeu(Couleur couleur){
+    public Jeu(Couleur couleur)
+    {
         this.couleur=couleur;
         pieces = ChessPiecesFactory.newPieces(couleur);
     }
 
     @Override
     public boolean isPieceHere(int x, int y) {
-        return findPiece(x,y) != null;
+        try
+        {
+            findPiece(x,y);
+            return true;
+            
+        }
+        catch (PieceNotFoundException pNFE)
+        {
+            return false;
+        }
     }
 
     @Override
-    public boolean isMoveOk(int xInit, int yInit, int xFinal, int yFinal, boolean isCatchOk, boolean isCastlingPossible) {
-        if (isPieceHere(xInit, yInit))
+    public boolean isMoveOk(int xInit, int yInit, int xFinal, int yFinal, boolean isCatchOk, boolean isCastlingPossible)
+    {
+        try
         {
             Pieces pstart = findPiece(xInit,yInit);
             return pstart.isMoveOk(xFinal, yFinal, isCatchOk, isCastlingPossible);
-        }    
-        return false;
+        }
+        catch (PieceNotFoundException pNFE)
+        {
+            return false;
+        }
+            
     }
 
     @Override
-    public boolean move(int xInit, int yInit, int xFinal, int yFinal) {
+    public boolean move(int xInit, int yInit, int xFinal, int yFinal)
+    {
         if (isMoveOk(xInit, yInit, xFinal, yFinal, possibleCapture, castling))
         {
-            return findPiece(xInit,yInit).move(xFinal,yFinal);
+            try
+            {
+                return findPiece(xInit,yInit).move(xFinal,yFinal);
+            }
+            catch (PieceNotFoundException pNFE)
+            {
+                return false;                        
+            }
+            
         }
        return false;
     }
@@ -58,7 +82,7 @@ public class Jeu implements Game{
         return true;
     }
     
-    private Pieces findPiece(int x, int y){
+    private Pieces findPiece(int x, int y) throws PieceNotFoundException {
         for(Pieces piece : this.pieces)
         {
             if(piece.getX()==x && piece.getY()==y)
@@ -66,20 +90,15 @@ public class Jeu implements Game{
                 return piece;
             }
         }
-        return null;
+        throw new PieceNotFoundException();
     }
     
-    public Couleur getPieceCouleur(int x, int y) throws NullPointerException {
+    public Couleur getPieceCouleur(int x, int y) throws PieceNotFoundException {
         return findPiece(x,y).getCouleur();
     }
     
-    public String getPieceName(int x, int y) {
-        if (isPieceHere(x, y))
-        {
-            return findPiece(x,y).getName();
-        }
-        return null;
-        
+    public String getPieceName(int x, int y) throws PieceNotFoundException {
+        return findPiece(x,y).getName();   
     }
     
     public List<PieceIHMs> getPiecesIHM(){

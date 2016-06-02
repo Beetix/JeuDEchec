@@ -40,7 +40,8 @@ public interface BoardGames {
 	 * @param x
 	 * @param y
 	 * @return la couleur de la pièce sélectionnée
+         * @throws model.PieceNotFoundException
 	 */
-	public Couleur getPieceColor(int x, int y);
+	public Couleur getPieceColor(int x, int y) throws PieceNotFoundException;
  
 }

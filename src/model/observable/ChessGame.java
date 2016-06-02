@@ -9,6 +9,7 @@ import model.BoardGames;
 import model.Coord;
 import model.Couleur;
 import model.Echiquier;
+import model.PieceNotFoundException;
 
 
 /**
@@ -85,7 +86,9 @@ public class ChessGame extends Observable implements BoardGames{
 		return echiquier.getColorCurrentPlayer();		
 	}	
 
-	public Couleur getPieceColor(int x, int y) throws NullPointerException {
+        @Override
+	public Couleur getPieceColor(int x, int y) throws PieceNotFoundException 
+        {
 		return echiquier.getPieceColor(x, y);
 	}
 

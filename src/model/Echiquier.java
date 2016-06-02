@@ -117,7 +117,7 @@ public class Echiquier {
         
     }
     
-    public Couleur getPieceColor(int x, int y) throws NullPointerException
+    public Couleur getPieceColor(int x, int y) throws PieceNotFoundException
     {
         return jeuCourant.getPieceCouleur(x, y);
     }
