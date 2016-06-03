@@ -7,7 +7,10 @@ package model;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import tools.ChessPiecesFactory;
+import tools.ChessSinglePieceFactory;
 
 /**
  *
@@ -164,9 +167,34 @@ public class Jeu implements Game, Cloneable {
         return retour;
     }
     
+    public boolean newPiece(String type, int x, int y)
+    {
+        try {
+            pieces.remove(findPiece(x, y));
+        } catch (PieceNotFoundException ex) {
+            Logger.getLogger(Jeu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return pieces.add(ChessSinglePieceFactory.newPiece(this.couleur, type, x, y));
+    }
+    
     public static void main(String args[]){
         Jeu leJeuBlanc = new Jeu(Couleur.BLANC);
         System.out.println(leJeuBlanc.isPieceHere(5, 1));
         System.out.println(leJeuBlanc);        
+    }
+
+    boolean isPionHere(int x, int y) {
+        if(this.isPieceHere(x,y))
+        {
+            try {
+                if((findPiece(x,y).getName())=="Pion")
+                {
+                    return true;
+                }
+            } catch (PieceNotFoundException ex) {
+                return false;
+            }
+        }
+        return false;
     }
 }

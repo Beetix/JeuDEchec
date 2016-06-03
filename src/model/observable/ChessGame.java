@@ -73,11 +73,29 @@ public class ChessGame extends Observable implements BoardGames{
 		this.notifyObservers(echiquier.getPiecesIHM()); 
 		return ret;	
 	}
+        
+        @Override
+	public List<Coord> getPossibleMovements(int xInit, int yInit){
+		return echiquier.getPossibleMovements(xInit,yInit);		
+	}
 
         @Override
 	public boolean isEnd(){
 		return echiquier.isEnd();		
 	}
+        
+        @Override
+	public boolean isPionAPromouvoir(){
+		return echiquier.isPionAPromouvoir();		
+	}
+        
+        @Override
+        public boolean newPiece(String type, int x, int y)
+        {
+            boolean valid = echiquier.newPiece(type, x, y);
+            this.notifyObservers(echiquier.getPiecesIHM());
+            return valid;
+        }
 
         @Override
 	public String getMessage() {
@@ -115,4 +133,5 @@ public class ChessGame extends Observable implements BoardGames{
 		super.addObserver(o);
 		this.notifyObservers(echiquier.getPiecesIHM()); 
 	}
+
 }

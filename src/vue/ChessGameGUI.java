@@ -19,17 +19,23 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.ColorModel;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
-import model.Couleur;
 import tools.ChessImageProvider;
+import tools.ChessPiecesFactory;
+import tools.ChessSinglePieceFactory;
 
 /**
  *
@@ -131,6 +137,7 @@ public class ChessGameGUI extends JFrame implements MouseListener, MouseMotionLi
             return;
         }
         
+        
  
         Point parentLocation = c.getParent().getLocation();
         xAdjustment = parentLocation.x - e.getX();
@@ -174,29 +181,45 @@ public class ChessGameGUI extends JFrame implements MouseListener, MouseMotionLi
             return;
         }
         
-        
-       /* if (c instanceof JLabel){
-            Container parent = c.getParent();
-            parent.remove(0);
-            parent.add( chessPiece );
+        if(chessGameControler.isPionAPromouvoir())
+        {
+            JDialog.setDefaultLookAndFeelDecorated(true);
+            Object[] selectionValues = { "Reine", "Tour", "Fou","Cavalier" };
+            String initialSelection = "Reine";
+            Object selection = JOptionPane.showInputDialog(null, "Quelle pièce voulez vous créer ?",
+                "Piece Select", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
+             
+            chessGameControler.newPiece(selection.toString(),(int)((e.getX())/87.5), (int)((e.getY())/87.5));
         }
-        else {
-            Container parent = (Container)c;
-            parent.add( chessPiece );
-        }*/
- 
-        //chessPiece.setVisible(true);
+        
+        
     }
     
     
     public void mouseClicked(MouseEvent e)
     {
+        for(Component comp:chessBoard.getComponents())
+        {
+            if(comp.getClass().equals(JPanel.class) )
+            {
+                ((JPanel)comp).setBorder(null);
+            }
+        }
        //Component c =  chessBoard.findComponentAt(e.getX()/87, e.getY()/75);
-
+        List<Coord> listeDesCasesPossibles =chessGameControler.getPossibleMovements((int)(e.getX()/87.5), (int)(e.getY()/87.5));
+            Iterator<Coord> i = listeDesCasesPossibles.iterator(); 
+            while (i.hasNext()) { 
+                Coord caseitem =i.next();
+                JPanel carreau = (JPanel)chessBoard.getComponent(caseitem.x+8*caseitem.y);
+                carreau.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, Color.pink));
+                carreau.revalidate();
+                carreau.repaint();
+            }
         if(chessGameControler.isPlayerOK(new Coord(  (int)(e.getX()/87.5) , (int)(e.getY()/87.5)  ) ) )
         {
             System.out.println((int)(e.getX()/87.5) + " " + (int)(e.getY()/87.5));
             chessGameControler.getMessage();
+                
         }
     }
     

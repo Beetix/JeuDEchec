@@ -1,5 +1,6 @@
 package controler;
 
+import java.util.List;
 import model.Coord;
 import model.Couleur;
 import model.PieceNotFoundException;
@@ -74,6 +75,15 @@ public abstract class AbstractChessGameControler implements ChessGameControlers 
 	public boolean isEnd(){
 		return this.chessGame.isEnd();		
 	}
+        
+        public boolean isPionAPromouvoir(){
+		return this.chessGame.isPionAPromouvoir();		
+	}
+        
+        public boolean newPiece(String type, int x, int y)
+        {
+            return this.chessGame.newPiece(type, x, y);
+        }
 
 	public String getMessage() {
 		String ret = null;		 
@@ -93,5 +103,9 @@ public abstract class AbstractChessGameControler implements ChessGameControlers 
 	protected Couleur getPieceColor(Coord initCoord) throws PieceNotFoundException {		
 		return this.chessGame.getPieceColor(initCoord.x, initCoord.y);		
 	}	
+        
+        public List<Coord> getPossibleMovements(int xInit, int yInit){
+                return this.chessGame.getPossibleMovements(xInit,yInit);
+        }
 	
 }

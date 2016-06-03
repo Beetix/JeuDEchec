@@ -1,6 +1,7 @@
 
 package model;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -203,5 +204,37 @@ public class Echiquier {
     public boolean isEnd()
     {
         return endOfGame;
+    }
+
+    public List<Coord> getPossibleMovements(int xInit, int yInit) {
+        List<Coord> liste=new LinkedList<>();
+        for(int i=0;i<8;i++)
+        {
+            for(int j=0;j<8;j++)
+            {
+                if(isMoveOk(xInit, yInit, i, j))
+                {
+                    boolean add = liste.add(new Coord(i,j));
+                }
+            }
+        }
+        return liste;
+    }
+    
+    public boolean isPionAPromouvoir() {
+        List<Coord> liste=new LinkedList<>();
+        for(int i=0;i<8;i++)
+        {
+            if(jeuNoir.isPionHere( i,0) || jeuBlanc.isPionHere( i,7))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean newPiece(String type, int x, int y)
+    {
+        return jeuEnAttente.newPiece(type, x, y);
     }
 }
