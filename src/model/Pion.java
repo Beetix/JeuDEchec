@@ -17,7 +17,7 @@ public abstract class Pion extends AbstractPiece {
 
     @Override
     protected boolean isDeplacementOkPourPiece(int xFinal, int yFinal, boolean isCatchOk, boolean isCastlingPossible) {
-        if(isDeplacementUneCaseSuivantColonne(xFinal, yFinal)
+        if(isDeplacementUneCaseSuivantColonne(xFinal, yFinal) && !isCatchOk
                 || isCatchOk && isDeplacementUneCaseDiagonale(xFinal, yFinal)
                 || isDeplacementDeDeuxAuPremierDeplacement(xFinal, yFinal))
         {

@@ -68,7 +68,7 @@ public abstract class AbstractPiece implements Pieces {
      */
     @Override
     public boolean capture(){
-        return true;
+        return false;
     }
     
     @Override
