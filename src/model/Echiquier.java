@@ -165,4 +165,21 @@ public class Echiquier {
         }
         return liste;
     }
+    
+    public boolean isPionAPromouvoir() {
+        List<Coord> liste=new LinkedList<>();
+        for(int i=0;i<8;i++)
+        {
+            if(jeuNoir.isPionHere( i,0) || jeuBlanc.isPionHere( i,7))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean newPiece(String type, int x, int y)
+    {
+        return jeuEnAttente.newPiece(type, x, y);
+    }
 }

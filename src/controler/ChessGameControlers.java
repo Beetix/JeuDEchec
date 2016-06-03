@@ -17,7 +17,21 @@ public interface ChessGameControlers {
 	 * @return message relatif aux déplacement, capture, etc.
 	 */
 	public String getMessage();
+        
+        /**
+	 * @return true if there is a pion who can be upgraded.
+	 */
+	public boolean isPionAPromouvoir();
 	
+        /**
+         * 
+         * @param type
+         * @param x
+         * @param y
+         * @return true if Piece was added
+         */
+        public boolean newPiece(String type, int x, int y);
+        
 	/**
 	 * @return true si fin de partie OK (echec et mat, pat, etc.)
 	 */

@@ -83,6 +83,19 @@ public class ChessGame extends Observable implements BoardGames{
 	public boolean isEnd(){
 		return echiquier.isEnd();		
 	}
+        
+        @Override
+	public boolean isPionAPromouvoir(){
+		return echiquier.isPionAPromouvoir();		
+	}
+        
+        @Override
+        public boolean newPiece(String type, int x, int y)
+        {
+            boolean valid = echiquier.newPiece(type, x, y);
+            this.notifyObservers(echiquier.getPiecesIHM());
+            return valid;
+        }
 
         @Override
 	public String getMessage() {
@@ -120,4 +133,5 @@ public class ChessGame extends Observable implements BoardGames{
 		super.addObserver(o);
 		this.notifyObservers(echiquier.getPiecesIHM()); 
 	}
+
 }

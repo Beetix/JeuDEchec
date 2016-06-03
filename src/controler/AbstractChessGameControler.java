@@ -75,6 +75,15 @@ public abstract class AbstractChessGameControler implements ChessGameControlers 
 	public boolean isEnd(){
 		return this.chessGame.isEnd();		
 	}
+        
+        public boolean isPionAPromouvoir(){
+		return this.chessGame.isPionAPromouvoir();		
+	}
+        
+        public boolean newPiece(String type, int x, int y)
+        {
+            return this.chessGame.newPiece(type, x, y);
+        }
 
 	public String getMessage() {
 		String ret = null;		 
