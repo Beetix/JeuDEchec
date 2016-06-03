@@ -25,7 +25,11 @@ public class Deplacement {
         depart = new Coord(xInit, yInit);
         xDelta = (xFinal - xInit);
         yDelta = (yFinal - yInit);
-        nbSauts = (xDelta != 0 ) ? Math.abs(xDelta) : Math.abs(yDelta); 
+        nbSauts = Math.min(Math.abs(xDelta), Math.abs(yDelta));
+        if (nbSauts == 0)
+        {
+            nbSauts = Math.max(Math.abs(xDelta), Math.abs(yDelta));
+        }
     }    
     
     public List<Coord> getPointsDePassage()

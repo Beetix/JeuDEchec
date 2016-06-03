@@ -118,4 +118,16 @@ public class DeplacementTest {
         assertTrue(uneCase.getPointsDePassage().isEmpty());
     }
     
+    @Test
+    public void unDeplacementEnLNeDoitPasAvoirDePointDePassage()
+    {
+        Deplacement enLBaseVersLeBas = new Deplacement(0, 0, 1, 2);
+        
+        assertTrue(enLBaseVersLeBas.getPointsDePassage().isEmpty());
+        
+        Deplacement enLBaseVersLaGauche = new Deplacement(5, 2, 3, 3);
+        
+        assertTrue(enLBaseVersLaGauche.getPointsDePassage().isEmpty());
+    }
+    
 }
