@@ -4,7 +4,7 @@ package model;
  *
  * @author beetix
  */
-public interface Pieces {
+public interface Pieces extends Cloneable {
     
     /**
      * @return indice de la colonne où est postionnée la pièce

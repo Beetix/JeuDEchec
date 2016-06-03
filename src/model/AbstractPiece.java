@@ -27,6 +27,13 @@ public abstract class AbstractPiece implements Pieces {
         this.couleur= couleur;
         this.name = name;
     }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+    
+    
     
     
     public int getX(){

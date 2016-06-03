@@ -93,14 +93,69 @@ public class Echiquier {
                 return false;
             }
         }
-
+        
+        
+        
+        /* Solution pour détecter une situation d'échec non fonctionnelle
+        
+        try
+        {
+            
+            Jeu simulationJeuCourant = (Jeu) jeuCourant.clone();
+            Jeu simulationJeuEnAttente = (Jeu) jeuEnAttente.clone();
+            
+            simulationJeuCourant.move(xInit, yInit, xFinal, yFinal);
+            
+            for (int xRoi = 0; xRoi < 8; xRoi++)
+            {
+                for (int yRoi = 0; yRoi < 8; yRoi++)
+                {
+                    if (simulationJeuCourant.isPieceHere(xRoi, yRoi))
+                    {
+                        try
+                        {
+                            String nomPiece = simulationJeuCourant.getPieceName(xRoi, yRoi);
+                            if (nomPiece.equals("Roi"))
+                            {
+                                for (int xPieceAdverse = 0; xPieceAdverse < 8; xPieceAdverse++)
+                                {
+                                    for (int yPieceAdverse = 0; yPieceAdverse < 8; yPieceAdverse++) 
+                                    {
+                                        if (simulationJeuEnAttente.isPieceHere(xPieceAdverse, yPieceAdverse)
+                                                && simulationJeuEnAttente.isMoveOk(xPieceAdverse, yPieceAdverse, xRoi, yRoi, true, false))
+                                        {
+                                            return false;
+                                        }
+                                    }
+                                }
+                            }
+                 
+                        }
+                        catch (PieceNotFoundException pNFE)
+                        {
+                            System.err.println("Cas pièce absente non géré !");
+                            return false;
+                        }
+                    }
+                }
+            }
+                    
+        }
+        catch (CloneNotSupportedException cNSE)
+        {
+            return false;
+        }
+        */
+        
+        
+       
         /* insérer traitement roc du roi
         if (jeuCourant.isPieceHere(xFinal, yFinal))
         {
             return false;
         }*/
         
-         return true;
+        return true;
     }
     
     public boolean move(int xInit, int yInit,int xFinal,int yFinal)

@@ -13,7 +13,7 @@ import tools.ChessPiecesFactory;
  *
  * @author user
  */
-public class Jeu implements Game{
+public class Jeu implements Game, Cloneable {
     
     private List<Pieces> pieces;
     
@@ -22,12 +22,37 @@ public class Jeu implements Game{
     private boolean isCastlingPossible;
     
     private boolean isCatchOk;
-    
+
     public Jeu(Couleur couleur)
     {
         this.couleur=couleur;
         pieces = ChessPiecesFactory.newPieces(couleur);
     }
+
+    public Jeu(List<Pieces> pieces, Couleur couleur, boolean isCastlingPossible, boolean isCatchOk, Pieces roi) {
+        this.pieces = pieces;
+        this.couleur = couleur;
+        this.isCastlingPossible = isCastlingPossible;
+        this.isCatchOk = isCatchOk;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        Jeu jeuClone = (Jeu) super.clone();
+                
+        List<Pieces> piecesClonees = new LinkedList<>();
+        for (Pieces piece : pieces)
+        {
+            Pieces pieceClonee = (Pieces) ((AbstractPiece) piece).clone();
+            piecesClonees.add(pieceClonee);
+        }
+        
+        jeuClone.pieces = piecesClonees;
+        
+        return jeuClone;
+    }
+    
+    
 
     @Override
     public boolean isPieceHere(int x, int y) {
@@ -127,10 +152,8 @@ public class Jeu implements Game{
     }
     
     public void setPossibleCapture(){
-        /* Find position of adverse jeu */
         this.isCatchOk=true;
     }
-    
     
     public String toString(){
         String retour = "Jeu "+this.couleur + ". Liste des pièces : \n ";
