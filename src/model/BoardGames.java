@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 
 /**
  * @author francoise.perrin
@@ -44,4 +46,12 @@ public interface BoardGames {
 	 */
 	public Couleur getPieceColor(int x, int y) throws PieceNotFoundException;
  
+        
+        /**
+         * 
+         * @param xInit
+         * @param yInit
+         * @return une liste contenant les cases de déplacement possibles
+         */
+        public List<Coord> getPossibleMovements(int xInit, int yInit);
 }

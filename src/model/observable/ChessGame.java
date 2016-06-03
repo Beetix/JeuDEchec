@@ -73,6 +73,11 @@ public class ChessGame extends Observable implements BoardGames{
 		this.notifyObservers(echiquier.getPiecesIHM()); 
 		return ret;	
 	}
+        
+        @Override
+	public List<Coord> getPossibleMovements(int xInit, int yInit){
+		return echiquier.getPossibleMovements(xInit,yInit);		
+	}
 
         @Override
 	public boolean isEnd(){

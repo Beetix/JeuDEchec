@@ -1,5 +1,6 @@
 package controler;
 
+import java.util.List;
 import model.Coord;
 
 public interface ChessGameControlers {
@@ -28,5 +29,13 @@ public interface ChessGameControlers {
 	 * pour empêcher tout déplacement sur le damier
 	 */
 	public boolean isPlayerOK(Coord initCoord);
+        
+        /**
+         * 
+         * @param xInit
+         * @param yInit
+         * @return 
+         */
+        public List<Coord> getPossibleMovements(int xInit, int yInit);
 
 }
