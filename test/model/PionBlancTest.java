@@ -23,8 +23,13 @@ public class PionBlancTest {
     }
 
     @Test
-    public void deplacementUneCaseVersLeHautDoitRenvoyerVrai() {
-        assertTrue(monPionBlanc.isMoveOk(0, 2, true, false));
+    public void deplacementUneCaseVersLeHautVideDoitRenvoyerVrai() {
+        assertTrue(monPionBlanc.isMoveOk(0, 2, false, false));
+    }
+    
+    @Test
+    public void deplacementUneCaseVersLeHautAlorsQuePieceDoitRenvoyerFaux() {
+        assertFalse(monPionBlanc.isMoveOk(0, 2, true, false));
     }
     
     @Test

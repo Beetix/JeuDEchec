@@ -73,7 +73,7 @@ public class Echiquier {
             return false;
         }
 
-        if (!jeuCourant.isMoveOk(xInit, yInit, xFinal, yFinal, false, false) )
+        if (!jeuCourant.isMoveOk(xInit, yInit, xFinal, yFinal, jeuEnAttente.isPieceHere(xFinal, yFinal), false) )
         {
             return false;
         }
@@ -110,7 +110,7 @@ public class Echiquier {
             
             if (jeuEnAttente.isPieceHere(xFinal, yFinal))
             {
-                jeuEnAttente.supprimerPiece(xFinal, yFinal);
+                jeuEnAttente.capture(xFinal, yFinal);
             }
             
 

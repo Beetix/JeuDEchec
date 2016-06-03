@@ -5,15 +5,15 @@
  */
 package model;
 
-import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 
 /**
  *
  * @author beetix
  */
-public class PionTest {
+public class AbstractPieceTest {
     
     class SimplePiece extends AbstractPiece
     {
@@ -30,9 +30,6 @@ public class PionTest {
     }
     
     Pieces maSimplePiece;
-    
-    public PionTest() {
-    }
     
     @Before
     public void setUp() {

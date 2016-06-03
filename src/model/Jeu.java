@@ -19,9 +19,9 @@ public class Jeu implements Game{
     
     private Couleur couleur;
     
-    private boolean castling;
+    private boolean isCastlingPossible;
     
-    private boolean possibleCapture;
+    private boolean isCatchOk;
     
     public Jeu(Couleur couleur)
     {
@@ -49,6 +49,8 @@ public class Jeu implements Game{
         try
         {
             Pieces pstart = findPiece(xInit,yInit);
+            this.isCatchOk = isCatchOk;
+            this.isCastlingPossible = isCastlingPossible;
             return pstart.isMoveOk(xFinal, yFinal, isCatchOk, isCastlingPossible);
         }
         catch (PieceNotFoundException pNFE)
@@ -61,7 +63,7 @@ public class Jeu implements Game{
     @Override
     public boolean move(int xInit, int yInit, int xFinal, int yFinal)
     {
-        if (isMoveOk(xInit, yInit, xFinal, yFinal, possibleCapture, castling))
+        if (isMoveOk(xInit, yInit, xFinal, yFinal, isCatchOk, isCastlingPossible))
         {
             try
             {
@@ -78,8 +80,14 @@ public class Jeu implements Game{
 
     @Override
     public boolean capture(int xCatch, int yCatch) {
-        
-        return true;
+        try
+        {
+            return pieces.remove(findPiece(xCatch,yCatch));
+        }
+        catch (PieceNotFoundException pNFE)
+        {
+            return false;                        
+        }
     }
     
     private Pieces findPiece(int x, int y) throws PieceNotFoundException {
@@ -115,12 +123,12 @@ public class Jeu implements Game{
     }
     
     public void setCastling(){
-        this.castling=true;
+        this.isCastlingPossible=true;
     }
     
     public void setPossibleCapture(){
         /* Find position of adverse jeu */
-        this.possibleCapture=true;
+        this.isCatchOk=true;
     }
     
     
@@ -132,19 +140,6 @@ public class Jeu implements Game{
         }
         return retour;
     }
-    
-    public boolean supprimerPiece(int xInit, int yInit)
-    {
-        try
-        {
-            return pieces.remove(findPiece(xInit,yInit));
-        }
-        catch (PieceNotFoundException pNFE)
-        {
-            return false;                        
-        }
-    }
-    
     
     public static void main(String args[]){
         Jeu leJeuBlanc = new Jeu(Couleur.BLANC);
