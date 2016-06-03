@@ -77,6 +77,22 @@ public class Echiquier {
         {
             return false;
         }
+        
+        if (jeuCourant.isPieceHere(xFinal, yFinal))
+        {
+            return false;
+        }
+        
+        Deplacement monDeplacement = new Deplacement(xInit, yInit, xFinal, yFinal);
+        
+        for (Coord pointDePassage : monDeplacement.getPointsDePassage())
+        {
+            if (jeuCourant.isPieceHere(pointDePassage.x, pointDePassage.y)
+                    || jeuEnAttente.isPieceHere(pointDePassage.x, pointDePassage.y))
+            {
+                return false;
+            }
+        }
 
         /* insérer traitement roc du roi
         if (jeuCourant.isPieceHere(xFinal, yFinal))
